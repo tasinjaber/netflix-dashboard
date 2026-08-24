@@ -1,0 +1,198 @@
+/* ============================================================
+   Netflix Information Visualization Dashboard — custom.css
+   Theme: white background, Netflix red accent, blue KPI cards,
+   rounded cards, modern font, hover effects, responsive layout
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --nf-red:   #E50914;
+  --nf-dark:  #221F1F;
+  --nf-blue:  #1F6FEB;
+  --nf-grey:  #6C757D;
+  --nf-bg:    #F7F8FA;
+  --nf-white: #FFFFFF;
+  --nf-radius: 14px;
+}
+
+body, .wrapper, .content-wrapper {
+  font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif !important;
+  background-color: var(--nf-bg) !important;
+  color: var(--nf-dark);
+}
+
+/* ---------- Navbar ---------- */
+.main-header.navbar {
+  background: var(--nf-white) !important;
+  border-bottom: 3px solid var(--nf-red);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.brand-link {
+  background: var(--nf-dark) !important;
+  border-bottom: none !important;
+}
+.brand-text {
+  color: var(--nf-red) !important;
+  font-weight: 800 !important;
+  letter-spacing: 1px;
+}
+
+/* ---------- Sidebar ---------- */
+.main-sidebar {
+  background: var(--nf-dark) !important;
+  transition: margin-left 0.25s ease, width 0.25s ease;
+}
+
+/* When collapsed (minified = FALSE) hide the sidebar completely -
+   never show half-cut filters, and remove any leftover gap */
+body.sidebar-collapse .main-sidebar { margin-left: -250px !important; }
+body.sidebar-collapse .sidebar-filters { display: none; }
+body.sidebar-collapse .content-wrapper,
+body.sidebar-collapse .main-footer { margin-left: 0 !important; }
+.sidebar .nav-link { color: #d9d9d9 !important; border-radius: 8px; }
+.sidebar .nav-link.active {
+  background: var(--nf-red) !important;
+  color: #fff !important;
+  box-shadow: 0 3px 8px rgba(229, 9, 20, 0.4);
+}
+.sidebar .nav-link:hover { background: rgba(255,255,255,0.08) !important; color: #fff !important; }
+/* Make the whole sidebar scrollable so lower filters are reachable */
+.main-sidebar { height: 100vh; }
+.main-sidebar .sidebar {
+  height: calc(100vh - 57px);
+  overflow-y: auto !important;
+  padding-bottom: 70px;
+}
+.main-sidebar .sidebar::-webkit-scrollbar { width: 6px; }
+.main-sidebar .sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.25); border-radius: 3px;
+}
+
+.sidebar-filters { padding: 10px 14px 40px 14px; }
+
+/* Every piece of text inside the dark sidebar must be light -
+   high-specificity selectors so AdminLTE/bs4Dash cannot override them */
+.main-sidebar .sidebar-filters,
+.main-sidebar .sidebar-filters label,
+.main-sidebar .sidebar-filters .control-label,
+.main-sidebar .sidebar-filters .form-group > label,
+.main-sidebar .sidebar-filters .shiny-input-container > label,
+.main-sidebar .sidebar-filters p,
+.main-sidebar .sidebar-filters span {
+  color: #F5F5F5 !important; font-size: 0.85rem;
+}
+.main-sidebar .sidebar-filters .form-group > label,
+.main-sidebar .sidebar-filters .shiny-input-container > label,
+.main-sidebar .sidebar-filters .control-label {
+  font-weight: 700; letter-spacing: 0.3px;
+}
+.main-sidebar .filter-title { color: #FFFFFF !important; }
+
+/* prettyRadioButtons option text */
+.main-sidebar .sidebar-filters .pretty .state label {
+  color: #F5F5F5 !important; font-weight: 500;
+}
+.main-sidebar .sidebar-filters .pretty .state label:before {
+  border-color: #bbb !important;
+}
+
+/* Slider: min/max, grid numbers and handle labels */
+.sidebar-filters .irs--shiny .irs-min,
+.sidebar-filters .irs--shiny .irs-max { color: #221F1F; background: #EDEDED; }
+.sidebar-filters .irs--shiny .irs-grid-text { color: #cfcfcf !important; }
+.sidebar-filters .irs--shiny .irs-bar { background: #E50914; border-color: #E50914; }
+.sidebar-filters .irs--shiny .irs-from,
+.sidebar-filters .irs--shiny .irs-to,
+.sidebar-filters .irs--shiny .irs-single { background: #E50914; }
+
+/* Dropdown / selectize boxes: white with dark text inside
+   (these override the light-text span rule above) */
+.main-sidebar .sidebar-filters .selectize-input,
+.main-sidebar .sidebar-filters .selectize-input input,
+.main-sidebar .sidebar-filters .btn.dropdown-toggle {
+  background: #fff !important; color: #221F1F !important;
+  border-radius: 8px; border: none;
+}
+.main-sidebar .sidebar-filters .selectize-input .item,
+.main-sidebar .sidebar-filters .selectize-input span,
+.main-sidebar .sidebar-filters .btn.dropdown-toggle span,
+.main-sidebar .sidebar-filters .filter-option-inner-inner {
+  color: #221F1F !important;
+}
+.main-sidebar .sidebar-filters .selectize-dropdown,
+.main-sidebar .sidebar-filters .dropdown-menu,
+.main-sidebar .sidebar-filters .dropdown-menu span {
+  color: #221F1F !important;
+}
+.sidebar-divider {
+  border-top: 1px solid rgba(255,255,255,0.15);
+  margin: 12px 10px;
+}
+.filter-title {
+  color: #fff; font-weight: 700; font-size: 0.95rem;
+  padding: 0 14px; letter-spacing: 0.5px;
+}
+
+/* ---------- Cards ---------- */
+.card {
+  border-radius: var(--nf-radius) !important;
+  border: none !important;
+  box-shadow: 0 2px 12px rgba(34, 31, 31, 0.07) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(34, 31, 31, 0.13) !important;
+}
+.card-header {
+  background: var(--nf-white) !important;
+  border-bottom: 2px solid var(--nf-red) !important;
+  border-radius: var(--nf-radius) var(--nf-radius) 0 0 !important;
+}
+.card-title { font-weight: 700 !important; color: var(--nf-dark) !important; }
+
+/* ---------- KPI value boxes (blue) ---------- */
+.small-box {
+  border-radius: var(--nf-radius) !important;
+  background: linear-gradient(135deg, #1F6FEB 0%, #1A54B8 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 14px rgba(31, 111, 235, 0.35) !important;
+  transition: transform 0.2s ease;
+}
+.small-box:hover { transform: translateY(-4px) scale(1.01); }
+.small-box .inner h3 { font-weight: 800; }
+.small-box .icon { color: rgba(255,255,255,0.35) !important; }
+.small-box.bg-danger, .small-box.bg-red {
+  background: linear-gradient(135deg, #E50914 0%, #B00610 100%) !important;
+  box-shadow: 0 4px 14px rgba(229, 9, 20, 0.35) !important;
+}
+
+/* ---------- Buttons ---------- */
+.btn-reset {
+  background: var(--nf-red); color: #fff; border: none;
+  border-radius: 10px; font-weight: 600; width: 100%;
+  padding: 8px; transition: all 0.2s ease;
+}
+.btn-reset:hover { background: #b00610; color: #fff; transform: translateY(-1px); }
+
+/* ---------- DataTable ---------- */
+table.dataTable { font-size: 0.85rem; }
+.dataTables_wrapper .dt-buttons .btn {
+  background: var(--nf-dark); color: #fff; border-radius: 8px; margin-right: 6px;
+}
+.dataTables_wrapper .dt-buttons .btn:hover { background: var(--nf-red); }
+table.dataTable tbody tr:hover { background-color: #FDECEC !important; }
+
+/* ---------- About tab ---------- */
+.about-badge {
+  display: inline-block; background: #FDECEC; color: var(--nf-red);
+  border-radius: 999px; padding: 4px 14px; font-weight: 600;
+  font-size: 0.8rem; margin: 3px 4px 3px 0;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .small-box .inner h3 { font-size: 1.4rem; }
+  .content-wrapper { padding: 6px; }
+}
